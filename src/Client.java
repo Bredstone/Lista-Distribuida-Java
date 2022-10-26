@@ -24,11 +24,11 @@ public class Client {
   }
 
   public void execute() {
-		String op, value;
-		int index;
-		
-		try {
-			System.out.println("Entre com um dos comandos a seguir:");
+    String op, value;
+    int index;
+
+    try {
+      System.out.println("Entre com um dos comandos a seguir:");
       System.out.println("\t\tadd <index> <valor>");
       System.out.println("\t\tget <index>");
       System.out.println("\t\tremove <index>");
@@ -36,8 +36,8 @@ public class Client {
       System.out.println("\t\tsair");
 
       menu_while:
-			while (true) {
-				op = in.next();
+      while (true) {
+        op = in.next();
         
         switch (op.toLowerCase()) {
           case "add":
@@ -74,7 +74,7 @@ public class Client {
             System.out.println("Opção Inválida!");
             break;
         }
-			}
+      }
 		
       in.close();
     } catch (IndexOutOfBoundsException e) {
@@ -82,8 +82,8 @@ public class Client {
     } catch (InputMismatchException e) {
       System.out.println("Valor inválido!");
     } catch (Exception e) {		
-			System.out.println("Exception: " + e.toString()); 
-		}
+      System.out.println("Exception: " + e.toString()); 
+    }
   }
 
   public static void main(String[] args) {
