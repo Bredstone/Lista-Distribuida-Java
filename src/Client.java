@@ -1,19 +1,18 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.NotBoundException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Client {
   Scanner in;
-  ListInterface<String> list;
+  List<String> list = Collections.synchronizedList(new ArrayList<String>());;
 
   @SuppressWarnings("unchecked")
   public Client() {
     in = new Scanner(System.in);
 
     try {
-      list = (ListInterface<String>) Naming.lookup("rmi://127.0.1.1/ListaDistribuida");
+      list = (List<String>) Naming.lookup("rmi://127.0.1.1/ListaDistribuida");
     } catch (RemoteException e) {
       System.out.println("\nRemoteException: " + e.toString());  
     } catch (NotBoundException e) {
@@ -35,44 +34,47 @@ public class Client {
       System.out.println("\t\tsize");
       System.out.println("\t\tsair");
 
-      menu_while:
-      while (true) {
-        op = in.next();
-        
-        switch (op.toLowerCase()) {
-          case "add":
-            index = in.nextInt();
-            value = in.next();
-            list.add(index, value);
+      synchronized(list)
+      {
+        menu_while:
+        while (true) {
+          op = in.next();
+          
+          switch (op.toLowerCase()) {
+            case "add":
+              index = in.nextInt();
+              value = in.next();
+              list.add(index, value);
 
-            System.out.println("Item adicionado!");
-            break;
+              System.out.println("Item adicionado!");
+              break;
 
-          case "get":
-            index = in.nextInt();
-            value = list.get(index);
+            case "get":
+              index = in.nextInt();
+              value = list.get(index);
 
-            System.out.println("Valor: " + value);
-            break;
+              System.out.println("Valor: " + value);
+              break;
 
-          case "remove":
-            index = in.nextInt();
-            value = list.remove(index);
+            case "remove":
+              index = in.nextInt();
+              value = list.remove(index);
 
-            System.out.println("Item removido: " + value);
-            break;
+              System.out.println("Item removido: " + value);
+              break;
 
-          case "size":
-            System.out.println("Tamanho: " + list.size());
-            break;
+            case "size":
+              System.out.println("Tamanho: " + list.size());
+              break;
 
-          case "sair":
-            System.out.println("Saindo do programa...");
-            break menu_while;
+            case "sair":
+              System.out.println("Saindo do programa...");
+              break menu_while;
 
-          default:
-            System.out.println("Opção Inválida!");
-            break;
+            default:
+              System.out.println("Opção Inválida!");
+              break;
+          }
         }
       }
 		
