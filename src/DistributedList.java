@@ -11,22 +11,22 @@ public class DistributedList<U> extends UnicastRemoteObject implements ListInter
   }
 
   @Override
-  public void add(int index, U element) throws RemoteException {
+  public synchronized void add(int index, U element) throws RemoteException {
     list.add(index, element);
   }
 
   @Override
-  public U get(int index) throws RemoteException {
+  public synchronized U get(int index) throws RemoteException {
     return list.get(index);
   }
 
   @Override
-  public U remove(int index) throws RemoteException {
+  public synchronized U remove(int index) throws RemoteException {
     return list.remove(index);
   }
 
   @Override
-  public int size() throws RemoteException {
+  public synchronized int size() throws RemoteException {
     return list.size();
   }
 }

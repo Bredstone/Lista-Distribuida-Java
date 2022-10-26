@@ -19,8 +19,6 @@ sh client.sh
 
 ## Implicações considerando acesso concorrente
 
-No nosso exemplo podemos perceber que caso dois clientes estejam acessando o mesmo índice da lista no mesmo momento, e se um resolver alterar seu valor enquanto outro remove o mesmo, poderá haver uma inconsistência.
+Caso dois clientes realizem operações sobre o mesmo índice da lista, no mesmo momento (dois usuários adicionem um item na mesma posição, por exemplo) poderá haver inconsistências.
 
-Para resolver este problema bastaria colocarmos o modificador synchronized em cada método da classe do objeto remoto onde pode haver a geração de inconsistência.
-
-Esse modificador faz com que um objeto que está sendo acessado só possa ser acessado novamente quando a tarefa que está sendo realizada sobre ele seja concluida.
+Para resolver esse problema foi adicionado o modificador ```synchronized``` em cada método da classe do objeto remoto. Esse modificador faz com que um objeto que está sendo acessado/modificado só possa ser acessado novamente quando a tarefa que está sendo realizada sobre ele seja concluída.
