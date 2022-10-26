@@ -17,6 +17,10 @@ Em outro terminal, para executar um ou mais clientes:
 sh client.sh
 ```
 
+## Exemplos de execução
+
+![image](https://user-images.githubusercontent.com/48719867/198130007-3f278475-1359-437c-80e3-6f244531f29b.png)
+
 ## Implicações considerando acesso concorrente
 
 Caso dois clientes realizem operações sobre o mesmo índice da lista, no mesmo momento (dois usuários adicionem um item na mesma posição, por exemplo) poderá haver inconsistências.
